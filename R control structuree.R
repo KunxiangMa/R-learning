@@ -50,6 +50,21 @@ for (i in 2:length(x)) {
 print(m)
 
 # task 7
+x <- 1
+for (i in 2:50) {
+  x[i] <- 1 + 1 / x[i-1]
+  if(abs(x[i]-x[i-1]) < 1e-10)
+    break
+}
+x[i]
+
+# task 8
+n <- 10
+coords <- matrix(rnorm (2*n), ncol =2)
+plot(coords)
+for (i in ) {
+  lines(x=coords[1,i],y=coords[2,i])
+}
 
 
 
