@@ -7,7 +7,7 @@ x <- rnorm(n)
 d <- numeric(0)# create the vector d
 for(i in 1:19)
   d[i] <- x[i+1] - x[i]
-
+d
 # 2
 # a
 plot(x = rc$cal.age, y = rc$rc.age,
@@ -24,7 +24,7 @@ x <- rc$cal.age
 lines(x, lowery, lty=3)
 uppery <- 0.8735 * rc$cal.age + 0.02968 * sqrt(17.50 + rc$cal.age ^ 2)
 lines(x, uppery, lty=3)
-# e not finished
+# e
 x <- rc$cal.age
 temp1 <- rbind(c(min(x),0.8735 * min(x)),c(max(x),0.8438 * max(x)),c(max(x),0.9031 * max(x)))
 polygon(temp1,col = 'gray', border = NA)
@@ -40,9 +40,10 @@ for (i in 1:200) {
   Gamma <- (1/C) * B
 }
 Gamma
+# check
 eigen(A)
 
-#4
+# 4
 rand <- trunc(runif(100,min = 1,max = 5))
 A <- c(0,-1)
 B <- c(0,1)
@@ -60,7 +61,7 @@ for (i in 1:100) {
 plot(X, pch = 16)
 lines(X)
 
-#5
+# 5
 x <- c(1,2,7,7,7,4,5,2,4,5,4,4)
 a <- 0
 max(x)
@@ -70,18 +71,18 @@ for (i in 1:length(x)) {
 }
 a
 
-#6
+# 6
 library(MASS)
 data(mammals)
-#(a)
+# a
 ord <- rank(mammals$brain/mammals$body)
 X <- mammals[ord[1:5],]
 X
-#(b) 1
+# b 1
 rho.boot <- rep(0,10000)
 samp.body <- sample(mammals$body,62,replace = TRUE)
 samp.brain <- sample(mammals$brain,62,replace = TRUE)
-#(b) 2
+# b 2
 for (i in 1:10000) {
   samp.body <- sample(mammals$body,62,replace = TRUE)
   samp.brain <- sample(mammals$brain,62,replace = TRUE)
@@ -89,5 +90,18 @@ for (i in 1:10000) {
 }
 quantile(rho.boot, probs = c(0.025,0.975))
 
-#7
+# 7
+library("ggplot2")
+# Function of drawing leaves
+Leaf <- function(i=6){
+  X <- seq(0,i*pi,0.01/i)
+  Y <- 2*sin(2*X)
+  Data <- data.frame(X=X,Y=Y)
+  ggplot(data = Data ,aes(x = X, y = Y))+
+    geom_line(colour = 'red', lwd = 1, alpha = 0.7)+
+    coord_polar()
+}
+#  Change the number of i to draw different pictures
+Leaf(6)
 
+# End
