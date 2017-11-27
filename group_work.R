@@ -92,3 +92,8 @@ trumpteam$day <- as.numeric(trumpteam$day)
 test.day.U <- wilcox.test(trumpreal$day,trumpteam$day,exact=FALSE,correct=FALSE)
 test.day.z <- z.test(trumpreal$day,trumpteam$day,alternative="two.side",sigma.x = sd(trumpreal$day), sigma.y = sd(trumpteam$day))
 
+
+
+# fiting
+
+
