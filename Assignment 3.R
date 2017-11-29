@@ -33,6 +33,7 @@ circle(c(0,2), c(0,0), c(1, 0.5))
 # 1 c
 
 circle <- function(x,y,r,col,a,b){
+  library("MASS")
   palette(rainbow(7))
   eqscplot(x, y, type="n", xlim=c(min(x)-1.5*r[which.min(x-r)], max(x)+1.5*r[which.max(x+r)]),
            ylim=c(min(y)-1.5*r[which.min(y-r)], max(y)+1.5*r[which.max(y+r)]),
@@ -47,6 +48,10 @@ circle <- function(x,y,r,col,a,b){
 }
 
 circle(health$HealthExpenditure,health$LifeExpectancy,sqrt(health$Population)/1e4,
-       health$Region, "health$Region,Health expenditure in $100's", "Life expectancy")
+       health$Region, "Health expenditure in $100's", "Life expectancy")
+
+# 2
+# 2 a
+
 
 
