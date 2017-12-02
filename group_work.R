@@ -1,15 +1,19 @@
 # read csv
+
 trump <- read.csv('D:/THINGS IN GLA/[subject]Introduction to R (Level M)/week8/trump.csv')
 
 # use package
+
 library("ggplot2")
 library("BSDA")
 
 # divide by source
+
 trumpteam <- trump[trump[,1] == 'iOS',]
 trumpreal <- trump[trump[,1] == 'Android',]
 
 # select & combine
+
 select <- function(x){
   x <- as.numeric(x)
   w <- boxplot(x = x)
@@ -30,6 +34,7 @@ rm(tmp)
 trump <- rbind(trumpreal,trumpteam)
 
 # boxplot
+
 ggplot(data = trump) +
   geom_boxplot(aes(source, nwords))
 
@@ -92,8 +97,19 @@ trumpteam$day <- as.numeric(trumpteam$day)
 test.day.U <- wilcox.test(trumpreal$day,trumpteam$day,exact=FALSE,correct=FALSE)
 test.day.z <- z.test(trumpreal$day,trumpteam$day,alternative="two.side",sigma.x = sd(trumpreal$day), sigma.y = sd(trumpteam$day))
 
+# the test shows that the source of twitters have close corelation with words, url, sentiment, day, and hour
 
+# translate the data
 
-# fiting
-
+distr <- as.matrix(abs(trumpreal$nwords - mean(trumpreal$nwords)))
+distt <- as.matrix(abs(trumpteam$nwords - mean(trumpteam$nwords)))
+resr <- as.matrix(trumpreal$source)
+rest <- as.matrix(trumpteam$source)
+regsw <-  cbind(rbind(resr,rest),rbind(distr,distt))
+for (i in 1:length(regsw[,1])) {
+  if(regsw[i,1]=="Android")
+    regsw[i,1] <- 2
+  if(regsw[i,1]=="iOS")
+    regsw[i,1] <- 1
+}
 

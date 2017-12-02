@@ -1,4 +1,5 @@
 # Assignment 3
+# 2294199m KUNXIANG MA 
 # Load file
 
 load(url("http://www.stats.gla.ac.uk/~rhaggarty/intro2r/a3.RData"))
@@ -42,6 +43,7 @@ circle <- function(x,y,r,col,a,b){
   eqscplot(x, y, type="n", xlim=c(min(x)-1.5*r[which.min(x-r)], max(x)+1.5*r[which.max(x+r)]),
            ylim=c(min(y)-1.5*r[which.min(y-r)], max(y)+1.5*r[which.max(y+r)]),
            xlab = a,ylab = b)
+  t <- seq(from = 0, to = 2 * pi, length.out = 100)
   data <- cbind(x,y,r,col)
   data <- data[order(data[,3], decreasing = TRUE),]
   for (i in 1:length(x)) {
@@ -154,3 +156,53 @@ eratosthenes <- function(n){
 
 eratosthenes(100)
 
+# 5
+
+durbin.watson <- function(x){
+  sum1 <- numeric(1)
+  sum2 <- numeric(1)
+  for (i in 2:length(x)) {
+    sum1 <- sum1 + (x[i] - x[i-1]) ^ 2
+  }
+  for (i in 1:length(x)) {
+    sum2 <- sum2 + x[i] ^ 2
+  }
+  d <- sum1 / sum2
+  return(d)
+}
+
+# 6 a
+
+emp <- function(x){
+  n <- length(x)
+  x <- x[order(x, decreasing = FALSE)]
+  y <- numeric(1)
+  for (i in 1:n) {
+    y[i] <- i/n
+  }
+  res <- cbind(x,y)
+  return(res)
+}
+
+x <- seq(14,1,by = -1)
+plot(emp(x),type = "s")
+plot(ecdf(x))
+
+# 6 b
+
+emp <- function(x,plot = FALSE){
+  n <- length(x)
+  x <- x[order(x, decreasing = FALSE)]
+  y <- numeric(1)
+  for (i in 1:n) {
+    y[i] <- i/n
+  }
+  res <- cbind(x,y)
+  if(plot == TRUE)
+    plot(res,type = "s")
+  return(res)
+}
+
+emp(x,TRUE)
+
+# END
